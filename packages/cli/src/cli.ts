@@ -23,6 +23,7 @@ import { addInspectOptions, runInspectCommand } from "./commands/agent/inspect.j
 import { addWaitOptions, runWaitCommand } from "./commands/agent/wait.js";
 import { addArchiveOptions, runArchiveCommand } from "./commands/agent/archive.js";
 import { addAttachOptions, runAttachCommand } from "./commands/agent/attach.js";
+import { addResumeOptions, runResumeCommand } from "./commands/agent/resume.js";
 import { withOutput } from "./output/index.js";
 import { onboardCommand } from "./commands/onboard.js";
 import {
@@ -101,6 +102,10 @@ export function createCli(): Command {
   addJsonAndDaemonHostOptions(
     addArchiveOptions(program.command("archive")),
   ).action(withOutput(runArchiveCommand));
+
+  addJsonAndDaemonHostOptions(
+    addResumeOptions(program.command("resume")),
+  ).action(withOutput(runResumeCommand));
 
   // Top-level local daemon shortcuts
   program.addCommand(onboardCommand());
